@@ -1,0 +1,21 @@
+/node_modules
+/.env.local
+/.umirc.local.ts
+/config/config.local.ts
+/src/.umi
+/src/.umi-production
+/.umi
+/.umi-production
+/.umi-test
+/dist
+/.mfsu
+/electron-dist
+
+# Project exclude paths
+/src/layouts/index.js
+/src/layouts/index.js.map
+/src/pages/docs.js
+/src/pages/docs.js.map
+/src/pages/index.js
+/src/pages/index.js.map
+.idea
