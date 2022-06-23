@@ -4,14 +4,15 @@
   "version": "1.0.0",
   "author": "wuzhixin",
   "description": "this is conversation for developer",
-  "main": "src/electron/index.js",
+  "main": "./electron/main.js",
+  "homepage": ".",
   "scripts": {
     "dev": "umi dev",
     "build": "umi build",
     "postinstall": "umi setup",
     "start": "npm run dev",
     "electorn:dev": "electron .",
-    "electron:dev:hot": "nodemon --watch src/electron --exec pnpm electorn:dev",
+    "electron:dev:hot": "nodemon --watch electron --exec pnpm electorn:dev",
     "electron:build": "electron-builder",
     "prepare": "husky install"
   },
@@ -47,6 +48,11 @@
     },
     "mac": {
       "category": "wuzhixin.app.program.technosphere"
-    }
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*"
+    ],
+    "extends": null
   }
 }
