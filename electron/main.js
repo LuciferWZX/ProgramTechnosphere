@@ -1,7 +1,9 @@
-const { app, BrowserWindow } = require("electron");
-const { createMainWindow } = require("./windows/mainWindow");
-const { createTray } = require("./windows/tray");
-const { isLockInstance } = require("./utils/util");
+const { app, BrowserWindow } = require('electron');
+const { createMainWindow } = require('./windows/mainWindow');
+const { createTray } = require('./windows/tray');
+const { isLockInstance } = require('./utils/util');
+
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'; //屏蔽安全告警
 let mainWin = null; //主窗口
 let tray = null; //window下的托盘，mac上的任务栏
 
@@ -15,11 +17,11 @@ const initApp = () => {
     mainWin = createMainWindow();
     tray = createTray();
     console.log(111, app.getVersion());
-    app.on("activate", () => {
+    app.on('activate', () => {
       if (BrowserWindow.getAllWindows().length === 0) createMainWindow();
     });
   });
-  app.on("window-all-closed", () => {
-    if (process.platform !== "darwin") app.quit();
+  app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') app.quit();
   });
 };

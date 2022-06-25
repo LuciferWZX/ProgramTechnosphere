@@ -1,22 +1,29 @@
 {
-  "private": true,
   "name": "program-technosphere",
   "version": "1.0.0",
-  "author": "wuzhixin",
+  "private": true,
   "description": "this is conversation for developer",
-  "main": "./electron/main.js",
   "homepage": ".",
+  "author": "wuzhixin",
+  "main": "./electron/main.js",
   "scripts": {
-    "dev": "umi dev",
     "build": "umi build",
-    "postinstall": "umi setup",
-    "start": "npm run dev",
+    "dev": "umi dev",
     "electorn:dev": "electron .",
-    "electron:dev:hot": "nodemon --watch electron --exec pnpm electorn:dev",
     "electron:build": "electron-builder",
-    "prepare": "husky install"
+    "electron:dev:hot": "nodemon --watch electron --exec pnpm electorn:dev",
+    "postinstall": "umi setup",
+    "prepare": "husky install",
+    "start": "npm run dev"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown",
+    "*.{js,jsx,ts,tsx,css,less}": [
+      "umi lint"
+    ]
   },
   "dependencies": {
+    "foca": "^1.0.0",
     "umi": "^4.0.0"
   },
   "devDependencies": {
@@ -25,20 +32,18 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@umijs/lint": "^4.0.1",
+    "@umijs/plugins": "^4.0.0",
     "electron": "^19.0.5",
     "electron-builder": "^23.1.0",
     "eslint": "^8.18.0",
     "husky": "^8.0.0",
     "lint-staged": "^13.0.2",
-    "prettier": "2.7.1",
+    "prettier": "^2",
+    "prettier-plugin-organize-imports": "^2",
+    "prettier-plugin-packagejson": "^2",
     "stylelint": "^14.9.1",
+    "tailwindcss": "^3",
     "typescript": "^4.1.2"
-  },
-  "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown",
-    "*.{js,jsx,ts,tsx,css,less}": [
-      "umi lint"
-    ]
   },
   "build": {
     "appId": "org.wzx.tech",
