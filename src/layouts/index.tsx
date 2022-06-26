@@ -1,22 +1,17 @@
-import React from 'react';
-import { Link, Outlet } from 'umi';
-import styles from './index.less';
+import type { FC } from 'react';
+import { Outlet } from 'umi';
 
-export default function Layout() {
+const Layout: FC = () => {
   return (
-    <div className={styles.navs}>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/docs">Docs</Link>
-        </li>
-        <li>
-          <a href="https://github.com/umijs/umi">Github</a>
-        </li>
-      </ul>
-      <Outlet />
+    <div
+      className={
+        'h-screen w-screen dark:bg-gray-900 dark:text-gray-100 box-border flex flex-col'
+      }
+    >
+      <div className={'flex-1'}>
+        <Outlet />
+      </div>
     </div>
   );
-}
+};
+export default Layout;
