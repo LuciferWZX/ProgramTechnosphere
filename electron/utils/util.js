@@ -1,4 +1,4 @@
-const { app } = require("electron");
+const { app } = require('electron');
 /**
  * 使用户无法直接双开
  * @param mainWin  需要聚焦的窗口
@@ -11,7 +11,7 @@ const lockInstance = async (mainWin, additionalData) => {
     return Promise.resolve(false);
   } else {
     app.on(
-      "second-instance",
+      'second-instance',
       (event, commandLine, workingDirectory, additionalData) => {
         // Print out data received from the second instance.
         console.log(additionalData);
@@ -20,12 +20,16 @@ const lockInstance = async (mainWin, additionalData) => {
           if (mainWin.isMinimized()) mainWin.restore();
           mainWin.focus();
         }
-      }
+      },
     );
     return Promise.resolve(true);
   }
 };
+//是否是darwin
+const isDarwin = process.platform === 'darwin';
+
 module.exports = {
   isDev: !app.isPackaged,
   isLockInstance: lockInstance,
+  isDarwin,
 };

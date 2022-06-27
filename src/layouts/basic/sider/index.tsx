@@ -4,10 +4,14 @@ import type { FC } from 'react';
 const SiderBar: FC = () => {
   return (
     <div
-      className={'w-0 xs:w-40 transition-width duration-200 ease-in-out shadow'}
+      className={
+        'w-0 xs:w-40 transition-width duration-200 ease-in-out shadow overflow-ellipsis overflow-hidden'
+      }
     >
-      <SiderHeader />
-      <div>未完成侧边内容</div>
+      <div className={'w-40'}>
+        <SiderHeader />
+        <div>未完成侧边内容</div>
+      </div>
     </div>
   );
 };

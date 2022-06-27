@@ -9,8 +9,9 @@ export default defineConfig({
   favicons: ['/assets/png/favicon.png'],
   metas: [
     //如果要设置特定资源安全策略，要通过以下方式
-    //{ "http-equiv": "Content-Security-Policy", content: "default-src 'self'" },
+    //{ "http-equiv": "Content-Security-Policy", content-header: "default-src 'self'" },
   ],
+  clientLoader: {},
   routes: routes,
   tailwindcss: {},
   plugins: [require.resolve('@umijs/plugins/dist/tailwindcss')],

@@ -14,4 +14,5 @@ const Layout: FC = () => {
     </div>
   );
 };
+
 export default Layout;

@@ -23,12 +23,18 @@
     ]
   },
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "ahooks": "^3.5.0",
+    "antd": "^4.21.3",
+    "dayjs": "^1.11.3",
     "foca": "^1.0.0",
     "storejs": "^2.0.1",
-    "umi": "^4.0.0"
+    "umi": "^4.0.0",
+    "umi-request": "^1.4.0"
   },
   "devDependencies": {
     "@types/electron": "^1.6.10",
+    "@types/mockjs": "^1.0.6",
     "@types/node": "^18.0.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
@@ -40,6 +46,7 @@
     "eslint": "^8.18.0",
     "husky": "^8.0.0",
     "lint-staged": "^13.0.2",
+    "mockjs": "^1.1.0",
     "prettier": "^2",
     "prettier-plugin-organize-imports": "^2",
     "prettier-plugin-packagejson": "^2",
