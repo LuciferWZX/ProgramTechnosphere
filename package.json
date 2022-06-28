@@ -10,7 +10,7 @@
     "build": "umi build",
     "dev": "umi dev",
     "electorn:dev": "electron .",
-    "electron:build": "electron-builder",
+    "electron:build": "pnpm run build && electron-builder",
     "electron:dev:hot": "nodemon --watch electron --exec pnpm electorn:dev",
     "postinstall": "umi setup",
     "prepare": "husky install",

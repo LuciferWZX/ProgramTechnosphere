@@ -1,3 +1,4 @@
+import Menu from '@/layouts/basic/sider/menu';
 import SiderHeader from '@/layouts/basic/sider/sider-header';
 import type { FC } from 'react';
 
@@ -10,7 +11,7 @@ const SiderBar: FC = () => {
     >
       <div className={'w-40'}>
         <SiderHeader />
-        <div>未完成侧边内容</div>
+        <Menu />
       </div>
     </div>
   );

@@ -1,17 +1,46 @@
-import type React from 'react';
-import type { FC } from 'react';
+import React from 'react';
 
-interface IProps {
+import { tuple } from '@/components/type';
+
+const ButtonTypes = tuple('default', 'primary', 'ghost');
+export type ButtonType = typeof ButtonTypes[number];
+const ButtonHTMLTypes = tuple('submit', 'button', 'reset');
+export type ButtonHTMLType = typeof ButtonHTMLTypes[number];
+export interface BaseButtonProps {
   icon?: React.ReactNode;
+  type?: ButtonType;
   children?: React.ReactNode;
-  type?: 'primary' | 'box';
+  block?: boolean;
   disabled?: boolean;
   animated?: boolean;
+  style?: React.ReactNode;
+  htmlType?: 'button' | 'submit' | 'reset';
   size?: 'small' | 'middle' | 'large';
-  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
+  onClick?: React.MouseEventHandler<HTMLElement>;
 }
-const Button: FC<IProps> = (props) => {
-  const { children, icon, size, disabled, animated, onClick } = props;
+export type NativeButtonProps = {
+  htmlType?: ButtonHTMLType;
+  onClick?: React.MouseEventHandler<HTMLElement>;
+} & BaseButtonProps &
+  Omit<React.ButtonHTMLAttributes<any>, 'type' | 'onClick'>;
+export type ButtonProps = NativeButtonProps;
+
+const InternalButton: React.ForwardRefRenderFunction<unknown, ButtonProps> = (
+  props,
+  ref,
+) => {
+  const {
+    children,
+    icon,
+    size,
+    disabled,
+    animated,
+    block,
+    type = 'default',
+    htmlType,
+    ...rest
+  } = props;
+  const buttonRef = (ref as any) || React.createRef<HTMLElement>();
   //size的样式
   const renderSize = (): string => {
     if (size === 'small') {
@@ -40,20 +69,44 @@ const Button: FC<IProps> = (props) => {
     }
     return 'transition-colors duration-200';
   };
+  const renderBlock = () => {
+    if (block) {
+      return 'flex w-full';
+    }
+    return 'inline-flex';
+  };
+  const renderType = () => {
+    if (type === 'primary') {
+      return '';
+    }
+    return 'focus:outline-blue-300 ';
+  };
   return (
-    <div
-      onClick={onClick}
+    <button
+      {...rest}
+      //eslint-disable-next-line react/button-has-type
+      type={htmlType}
       className={`
-          inline-flex items-center dark:text-gray-300 
-          rounded-md text-sm select-none 
+          
+          bg-transparent
+          items-center dark:text-gray-300 
+          rounded-md text-sm select-none
+          border-transparent
+          outline-none
+          outline-offset-0
+          ${renderBlock()}
+          ${renderBlock()} 
           ${renderAnimated()}
           ${renderSpaceX()}
           ${renderDisabled()}
-          ${renderSize()}`}
+          ${renderSize()}
+          ${renderType()}`}
+      ref={buttonRef}
     >
       {icon && <div>{icon}</div>}
       <div>{children}</div>
-    </div>
+    </button>
   );
 };
+const Button = React.forwardRef<unknown, ButtonProps>(InternalButton);
 export default Button;
