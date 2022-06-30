@@ -8,9 +8,7 @@ const Layout: FC = () => {
         'h-screen w-screen dark:bg-gray-900 dark:text-gray-100 box-border flex flex-col'
       }
     >
-      <div className={'flex-1'}>
-        <Outlet />
-      </div>
+      <Outlet />
     </div>
   );
 };

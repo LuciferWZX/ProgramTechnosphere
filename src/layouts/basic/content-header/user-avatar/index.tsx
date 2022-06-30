@@ -24,7 +24,14 @@ const UserAvatar: FC = () => {
           <div className={'text-xs'}>你好，{user.username}</div>
           <div className={'text-xs'}>{time}</div>
         </div>
-        <PTButton icon={<SettingOutlined />} onClick={handleSetting} />
+        <PTButton
+          icon={
+            <SettingOutlined
+              className={'transition duration-500 hover:-rotate-90'}
+            />
+          }
+          onClick={handleSetting}
+        />
       </div>
     );
   }

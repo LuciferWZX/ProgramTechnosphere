@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
 const HomePage: FC = () => {
-  return <div>HomePage</div>;
+  return <div style={{ height: 1900 }}>HomePage</div>;
 };
 export default HomePage;

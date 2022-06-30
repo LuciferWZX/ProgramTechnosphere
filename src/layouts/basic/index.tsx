@@ -5,11 +5,11 @@ import { Outlet } from 'umi';
 
 const BasicLayout: FC = () => {
   return (
-    <div className={'h-full w-full flex'}>
+    <div className={'h-full w-full flex overflow-hidden'}>
       <SiderBar />
-      <div className={'flex flex-col flex-1 dark:bg-gray-800'}>
+      <div className={'flex flex-col flex-1 dark:bg-black'}>
         <ContentHeader />
-        <div className={'flex-1 px-4'}>
+        <div className={'flex-1 px-4 box-border overflow-auto'}>
           <Outlet />
         </div>
       </div>

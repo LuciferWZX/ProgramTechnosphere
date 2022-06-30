@@ -1,5 +1,7 @@
 import { StoreKey } from '@/constants/enum';
+import { createLogger } from 'redux-logger';
 import store from 'storejs';
+//配置热更新
 export const hotUpdate = () => {
   // @ts-ignore
   if (import.meta.hot) {
@@ -39,5 +41,14 @@ export const initSystemTheme = (): void => {
         document.documentElement.classList.remove('dark');
       }
     }
+  });
+};
+//初始化redux-logger
+export const initReduxLogger = () => {
+  return createLogger({
+    collapsed: true,
+    diff: true,
+    duration: true,
+    logErrors: true,
   });
 };

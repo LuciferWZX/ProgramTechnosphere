@@ -30,6 +30,7 @@ const InternalButton: React.ForwardRefRenderFunction<unknown, ButtonProps> = (
   ref,
 ) => {
   const {
+    className,
     children,
     icon,
     size,
@@ -69,15 +70,17 @@ const InternalButton: React.ForwardRefRenderFunction<unknown, ButtonProps> = (
     }
     return 'transition-colors duration-200';
   };
+  //是否占一行
   const renderBlock = () => {
     if (block) {
       return 'flex w-full';
     }
     return 'inline-flex';
   };
+  //组件的类型
   const renderType = () => {
     if (type === 'primary') {
-      return '';
+      return 'text-blue-700 bg-blue-lightPrimary hover:bg-blue-300 dark:bg-blue-500 dark:hover:bg-blue-400';
     }
     return 'focus:outline-blue-300 ';
   };
@@ -100,11 +103,12 @@ const InternalButton: React.ForwardRefRenderFunction<unknown, ButtonProps> = (
           ${renderSpaceX()}
           ${renderDisabled()}
           ${renderSize()}
-          ${renderType()}`}
+          ${renderType()}
+          ${className}`}
       ref={buttonRef}
     >
       {icon && <div>{icon}</div>}
-      <div>{children}</div>
+      {children && <div>{children}</div>}
     </button>
   );
 };
