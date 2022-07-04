@@ -1,12 +1,21 @@
 import { PTButton } from '@/components';
 import { systemStore } from '@/stores/systemStore';
-import { CopyOutlined, DropboxOutlined, HomeOutlined } from '@ant-design/icons';
+import {
+  AppstoreAddOutlined,
+  CopyOutlined,
+  DropboxOutlined,
+  HomeOutlined,
+} from '@ant-design/icons';
 import { Tooltip } from 'antd';
 import { useModel } from 'foca';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 import { history, useLocation } from 'umi';
-type TMenuKey = '/basic/home' | '/basic/socket' | '/basic/share';
+type TMenuKey =
+  | '/basic/home'
+  | '/basic/socket'
+  | '/basic/create'
+  | '/basic/micro-apps';
 interface IMenu {
   id: TMenuKey;
   name: string;
@@ -17,8 +26,9 @@ const Menu: FC = () => {
   const location = useLocation();
   const [menus] = useState<IMenu[]>([
     { id: '/basic/home', name: '首页', icon: <HomeOutlined /> },
+    { id: '/basic/micro-apps', name: '微应用', icon: <AppstoreAddOutlined /> },
     { id: '/basic/socket', name: 'Socket测试', icon: <DropboxOutlined /> },
-    { id: '/basic/share', name: '分享', icon: <CopyOutlined /> },
+    { id: '/basic/create', name: '创作中心', icon: <CopyOutlined /> },
   ]);
   const isScroll = useModel(systemStore, (state) => state.siderScroll);
   const scrollClassName = (): string => {

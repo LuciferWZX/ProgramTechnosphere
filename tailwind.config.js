@@ -30,6 +30,7 @@ module.exports = {
   corePlugins: {
     preflight: false,
   },
+  plugins: [require('daisyui')],
   purge: ['./src/**/*.{ts,tsx,js,jsx}'],
   darkMode: 'class',
   content: [

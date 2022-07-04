@@ -4,7 +4,6 @@ import routes from './routes';
 export default defineConfig({
   npmClient: 'pnpm',
   title: '技术分享圈',
-  history: { type: 'hash' },
   publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   favicons: ['/assets/png/favicon.png'],
   metas: [

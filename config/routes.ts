@@ -14,7 +14,15 @@ const routes: any[] = [
     routes: [
       { redirect: '/basic/home', path: '/basic' },
       { path: '/basic/home', component: '@/pages/home' },
+      {
+        path: '/basic/micro-apps',
+        component: '@/pages/micro-apps',
+        // routes:[
+        //   { path: '/basic/micro-apps', component: '@/pages/home' },
+        // ]
+      },
       { path: '/basic/setting', component: '@/pages/setting' },
+      { path: '/basic/create', component: '@/pages/create' },
       { path: '*', component: '@/pages/404' },
     ],
   },
