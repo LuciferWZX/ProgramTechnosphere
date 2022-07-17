@@ -4,7 +4,6 @@ import { Outlet } from 'umi';
 const EntryLayout: FC = () => {
   return (
     <div>
-      EntryLayout
       <Outlet />
     </div>
   );

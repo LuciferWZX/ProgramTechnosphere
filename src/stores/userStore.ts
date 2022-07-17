@@ -24,7 +24,7 @@ export const userStore = defineModel('user', {
   initialState: initialState,
   events: {
     async onInit() {
-      await this.fetchUserInfo();
+      //await this.fetchUserInfo();
     },
   },
   effects: {

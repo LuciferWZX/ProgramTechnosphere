@@ -17,7 +17,10 @@
     "start": "npm run dev"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "**/*": "prettier --write --ignore-unknown",
+    "*.{js,jsx,ts,tsx,css,less}": [
+      "umi lint"
+    ]
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
@@ -51,6 +54,7 @@
     "husky": "^8.0.0",
     "lint-staged": "^13.0.2",
     "mockjs": "^1.1.0",
+    "nodemon": "^2.0.19",
     "prettier": "^2",
     "prettier-plugin-organize-imports": "^2",
     "prettier-plugin-packagejson": "^2",
