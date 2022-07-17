@@ -30,6 +30,9 @@ export const systemStore = defineModel('system', {
     updateSiderScroll(state, isScroll?: boolean) {
       state.siderScroll = isScroll ?? !state.siderScroll;
     },
+    switchTheme(state, theme: SystemTheme) {
+      state.theme = theme;
+    },
   },
   persist: {
     version: 1,

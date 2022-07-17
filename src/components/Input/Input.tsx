@@ -1,6 +1,6 @@
+import { Input as AntInput } from 'antd';
 import type React from 'react';
 import type { FC } from 'react';
-
 interface InputProps {
   placeholder?: string;
   type?: React.HTMLInputTypeAttribute;
@@ -9,13 +9,17 @@ interface InputProps {
 const Input: FC<InputProps> = (props) => {
   const { placeholder, type, className } = props;
   return (
-    <input
+    <AntInput
       type={type}
       placeholder={placeholder}
-      className={`input input-bordered input-sm w-full max-w-xs ${
-        className ?? ''
-      }
-            `}
+      //allowClear={true}
+      allowClear={true}
+      className={className}
+      //className={`dark:input-dark ${className ?? ''}`}
+      // className={`input input-bordered input-sm w-full max-w-xs ${
+      //   className ?? ''
+      // }
+      //       `}
     />
   );
 };

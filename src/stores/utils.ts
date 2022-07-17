@@ -1,4 +1,5 @@
 import { StoreKey } from '@/constants/enum';
+import { systemStore, SystemTheme } from '@/stores/systemStore';
 import { createLogger } from 'redux-logger';
 import store from 'storejs';
 //配置热更新
@@ -35,10 +36,12 @@ export const initSystemTheme = (): void => {
         console.log('系统主题：dark');
         if (currentTheme !== 'dark') {
           document.documentElement.classList.add('dark');
+          systemStore.switchTheme(SystemTheme.Dark);
         }
       } else {
         console.log('系统主题：light');
         document.documentElement.classList.remove('dark');
+        systemStore.switchTheme(SystemTheme.Light);
       }
     }
   });

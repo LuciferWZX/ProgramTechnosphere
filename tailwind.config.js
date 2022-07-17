@@ -21,6 +21,10 @@ module.exports = {
       indigo: colors.indigo,
       red: colors.rose,
       yellow: colors.amber,
+      // customDark:{
+      //   bgColor:'#2a303c',
+      //   placeholderColor:'#9ca3af'
+      // }
     },
     screens: {
       xs: '530px',
