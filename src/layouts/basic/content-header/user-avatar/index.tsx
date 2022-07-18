@@ -2,10 +2,11 @@ import { PTButton } from '@/components';
 import { useTimer } from '@/hooks/useTimer';
 import { userStore } from '@/stores/userStore';
 import { isElectron } from '@/utils/utils';
-import { SettingOutlined } from '@ant-design/icons';
-import { Avatar } from 'antd';
-import { useModel } from 'foca';
+import { LogoutOutlined, SettingOutlined } from '@ant-design/icons';
+import { Avatar, Dropdown, Menu, message } from 'antd';
+import { store, useModel } from 'foca';
 import type { FC } from 'react';
+import { history } from 'umi';
 
 const UserAvatar: FC = () => {
   const user = useModel(userStore, (state) => state.user);
@@ -23,8 +24,28 @@ const UserAvatar: FC = () => {
       });
     } else {
       //web端
+      history.push('/entry/login');
     }
   };
+  //退出登录
+  const logout = () => {
+    //重置（用户）所有数据，其他的store需要设置skipRefresh: true
+    store.refresh();
+    message.success('已退出登录');
+  };
+  const menu = (
+    <Menu
+      items={[
+        {
+          key: 'logout',
+          danger: true,
+          icon: <LogoutOutlined />,
+          label: '退出登录',
+          onClick: logout,
+        },
+      ]}
+    />
+  );
   if (user) {
     return (
       <div className={'flex space-x-1 items-center'}>
@@ -37,14 +58,16 @@ const UserAvatar: FC = () => {
           <div className={'text-xs'}>你好，{user.username}</div>
           <div className={'text-xs'}>{time}</div>
         </div>
-        <PTButton
-          icon={
-            <SettingOutlined
-              className={'transition duration-500 hover:-rotate-90'}
-            />
-          }
-          onClick={handleSetting}
-        />
+        <Dropdown trigger={['click']} overlay={menu}>
+          <PTButton
+            icon={
+              <SettingOutlined
+                className={'transition duration-500 hover:-rotate-90'}
+              />
+            }
+            onClick={handleSetting}
+          />
+        </Dropdown>
       </div>
     );
   }
@@ -57,7 +80,6 @@ const UserAvatar: FC = () => {
       >
         登
       </Avatar>
-      <PTButton icon={<SettingOutlined />} onClick={handleSetting} />
     </div>
   );
 };

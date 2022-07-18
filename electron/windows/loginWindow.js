@@ -7,12 +7,13 @@ const { DIST_PATH } = require('../constants/constant');
 const preload = path.resolve(__dirname, '../preload/main-preload.js');
 const createWindow = (parentWindow) => {
   const win = new BrowserWindow({
-    width: 500,
-    height: 400,
+    width: 650,
+    height: 500,
     parent: parentWindow,
     modal: true,
+    show: false,
     // skipTaskbar:true,
-    // resizable:false,
+    resizable: false,
     // minimizable:false,
     // maximizable:false,
     title: '登录',
@@ -22,6 +23,7 @@ const createWindow = (parentWindow) => {
   });
   if (isDev) {
     win.loadURL('http://127.0.0.1:8000/#/entry/login').then();
+    win.webContents.openDevTools();
   } else {
     //const urlPath = path.resolve(__dirname, "../../dist/index.html");
     const URL = url.format({
@@ -32,7 +34,7 @@ const createWindow = (parentWindow) => {
     });
     win.loadURL(URL).then();
   }
-  win.webContents.openDevTools();
+
   return win;
 };
 module.exports = {

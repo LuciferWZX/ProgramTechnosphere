@@ -11,6 +11,7 @@ const Layout: FC = () => {
   useEffect(() => {
     setPrefix(theme === SystemTheme.Light ? 'custom-default' : 'custom-dark');
   }, [theme]);
+
   // console.log(123,status);
   console.log(prefix);
   return (
