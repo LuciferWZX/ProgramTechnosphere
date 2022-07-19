@@ -1,10 +1,10 @@
 import type { AccountType, Sex } from '@/constants/enum';
 import { ResultCode } from '@/constants/enum';
 import type { EmailLoginParams } from '@/services/types';
-import { emailLogin, getUserInfo } from '@/services/user';
+import { emailLogin, getUserInfo, logout } from '@/services/user';
 import { isElectron } from '@/utils/utils';
 import { message } from 'antd';
-import { defineModel } from 'foca';
+import { defineModel, store } from 'foca';
 import { history } from 'umi';
 
 export interface User {
@@ -36,19 +36,15 @@ export const userStore = defineModel('user', {
     async fetchUserInfo() {
       const result = await getUserInfo();
       if (result && result.code === ResultCode.Success) {
-        console.log(result.msg);
         this.setUser(result.data);
       } else {
-        console.log('查询用户信息失败');
+        console.error('查询用户信息失败');
       }
     },
     async emailLogin(params: EmailLoginParams) {
       const result = await emailLogin(params);
-
       if (result) {
         if (result.code === ResultCode.Success) {
-          console.log(result.msg);
-
           if (isElectron()) {
             return result.data;
           }
@@ -59,8 +55,17 @@ export const userStore = defineModel('user', {
           message.error({ content: result.msg, key: 'error', duration: 2 });
         }
       } else {
-        console.log('查询用户信息失败');
+        console.error('查询用户信息失败');
         message.error({ content: '登录失败', key: 'error' });
+      }
+    },
+    async logout() {
+      const result = await logout();
+      if (result && result.code === ResultCode.Success) {
+        store.refresh();
+        message.success('已退出登录');
+      } else {
+        console.error(result);
       }
     },
   },

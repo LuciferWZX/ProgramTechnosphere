@@ -37,4 +37,5 @@ export const systemStore = defineModel('system', {
   persist: {
     version: 1,
   },
+  skipRefresh: true,
 });

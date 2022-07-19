@@ -1,15 +1,22 @@
+import { ReactComponent as FemaleAvatar } from '@/assets/svg/female-avatar.svg';
+import { ReactComponent as MaleAvatar } from '@/assets/svg/male-avatar.svg';
+import { ReactComponent as TwoDimensional } from '@/assets/svg/two-dimensional.svg';
 import { PTButton } from '@/components';
+import { Sex } from '@/constants/enum';
 import { useTimer } from '@/hooks/useTimer';
 import { userStore } from '@/stores/userStore';
 import { isElectron } from '@/utils/utils';
-import { LogoutOutlined, SettingOutlined } from '@ant-design/icons';
-import { Avatar, Dropdown, Menu, message } from 'antd';
-import { store, useModel } from 'foca';
+import Icon, { LogoutOutlined, SettingOutlined } from '@ant-design/icons';
+import { useMemoizedFn } from 'ahooks';
+import { Avatar, Dropdown, Menu } from 'antd';
+import { useLoading, useModel } from 'foca';
+import type React from 'react';
 import type { FC } from 'react';
 import { history } from 'umi';
 
 const UserAvatar: FC = () => {
   const user = useModel(userStore, (state) => state.user);
+  const loading = useLoading(userStore.logout);
   const { time } = useTimer();
   const handleSetting = () => {
     console.log('点击了setting');
@@ -28,11 +35,28 @@ const UserAvatar: FC = () => {
     }
   };
   //退出登录
-  const logout = () => {
-    //重置（用户）所有数据，其他的store需要设置skipRefresh: true
-    store.refresh();
-    message.success('已退出登录');
+  const logout = async () => {
+    await userStore.logout();
   };
+  //渲染头像地址
+  const renderAvatar = useMemoizedFn((): React.ReactNode => {
+    if (user) {
+      if (user.sex === Sex.Male) {
+        return (
+          <Icon className={'text-2xl leading-none'} component={MaleAvatar} />
+        );
+      }
+      if (user.sex === Sex.Female) {
+        return (
+          <Icon className={'text-2xl leading-none'} component={FemaleAvatar} />
+        );
+      }
+      return (
+        <Icon className={'text-xl leading-none'} component={TwoDimensional} />
+      );
+    }
+    return null;
+  });
   const menu = (
     <Menu
       items={[
@@ -40,7 +64,8 @@ const UserAvatar: FC = () => {
           key: 'logout',
           danger: true,
           icon: <LogoutOutlined />,
-          label: '退出登录',
+          label: loading ? '正在退出' : '退出登录',
+          disabled: loading,
           onClick: logout,
         },
       ]}
@@ -51,6 +76,7 @@ const UserAvatar: FC = () => {
       <div className={'flex space-x-1 items-center'}>
         <Avatar
           size={'small'}
+          icon={renderAvatar()}
           style={{ backgroundColor: '#1890ff' }}
           src={user.avatar}
         />

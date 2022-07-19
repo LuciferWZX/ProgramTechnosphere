@@ -19,3 +19,9 @@ export const emailLogin = async (
     data: params,
   });
 };
+//退出登录
+export const logout = async (): Promise<ResType<null> | undefined> => {
+  return request('/user/logout', {
+    method: 'POST',
+  });
+};

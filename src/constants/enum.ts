@@ -8,8 +8,9 @@ export enum AccountType {
   Github, //Github
 }
 export enum Sex {
-  female, //女性
-  male, //男性
+  Female, //女性
+  Male, //男性
+  TwoDimensional,
 }
 export enum ResultCode {
   Success,
