@@ -1,4 +1,6 @@
+import { StoreKey } from '@/constants/enum';
 import { userStore } from '@/stores/userStore';
+import store from 'storejs';
 import { extend, ResponseError } from 'umi-request';
 const errorHandler = (error: ResponseError) => {
   // if(error.response){
@@ -21,7 +23,7 @@ const request = extend({
 });
 request.interceptors.request.use((url, options) => {
   const headers = options.headers as { [key: string]: any };
-  const token = userStore.state.user?.token;
+  const token = userStore.state.user?.token ?? store.get(StoreKey.Token);
   if (token && headers) {
     headers.authorization = token;
   }

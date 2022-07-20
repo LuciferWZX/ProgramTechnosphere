@@ -1,5 +1,4 @@
 import { systemStore } from '@/stores/systemStore';
-import { userStore } from '@/stores/userStore';
 import { hotUpdate, initReduxLogger, initSystemTheme } from '@/stores/utils';
 import { engines, Middleware, store } from 'foca';
 import * as process from 'process';
@@ -16,7 +15,7 @@ store.init({
       key: `PT_${process.env.NODE_ENV}`,
       version: 1,
       engine: engines.localStorage,
-      models: [systemStore, userStore],
+      models: [systemStore],
     },
   ],
 });

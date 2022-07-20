@@ -1,4 +1,5 @@
 export enum StoreKey {
+  Token = 'pt-token',
   Theme = 'theme',
 }
 export enum AccountType {
