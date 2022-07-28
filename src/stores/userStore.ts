@@ -60,7 +60,7 @@ export const userStore = defineModel('user', {
         }
       } else {
         console.error('查询用户信息失败');
-        message.error({ content: '登录失败', key: 'error' });
+        message.error({ content: '登录失败', key: 'error',duration:1000 });
       }
     },
     async logout() {

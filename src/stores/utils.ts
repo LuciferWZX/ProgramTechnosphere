@@ -36,11 +36,13 @@ export const initSystemTheme = (): void => {
         console.log('系统主题：dark');
         if (currentTheme !== 'dark') {
           document.documentElement.classList.add('dark');
+          document.documentElement.setAttribute('data-color-mode', 'dark')
           systemStore.switchTheme(SystemTheme.Dark);
         }
       } else {
         console.log('系统主题：light');
         document.documentElement.classList.remove('dark');
+        document.documentElement.removeAttribute('data-color-mode')
         systemStore.switchTheme(SystemTheme.Light);
       }
     }

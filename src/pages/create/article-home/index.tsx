@@ -1,11 +1,12 @@
-
+import Header from './Header';
 import type { FC } from 'react';
 import styles from './index.less';
-import { Outlet } from "umi";
+import ArticleList from "./ArticleList";
 const Create: FC = () => {
   return (
     <div className={styles.createContainer}>
-      <Outlet/>
+      <Header />
+      <ArticleList/>
     </div>
   );
 };

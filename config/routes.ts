@@ -22,7 +22,24 @@ const routes: any[] = [
         // ]
       },
       { path: '/basic/setting', component: '@/pages/setting' },
-      { path: '/basic/create', component: '@/pages/create' },
+      {
+        path: '/basic/create',
+        component: '@/pages/create',
+        routes:[
+          { redirect: '/basic/create/article-home', path: '/basic/create' },
+          {
+            path: '/basic/create/article-home',
+            component: '@/pages/create/article-home' ,
+            wrappers:['@/wrappers/AuthorityWrapper'],
+          },
+          {
+            path: '/basic/create/create-article',
+            component: '@/pages/create/create-article',
+            wrappers:['@/wrappers/AuthorityWrapper'],
+          },
+        ]
+      },
+      { path: '/basic/403', component: '@/pages/403' },
       { path: '*', component: '@/pages/404' },
     ],
   },

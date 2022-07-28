@@ -38,9 +38,9 @@ const BasicLayout: FC = () => {
   return (
     <div className={'h-full w-full flex overflow-hidden'}>
       <SiderBar />
-      <div className={'flex flex-col flex-1 dark:bg-black'}>
+      <div className={'flex flex-col flex-1 dark:bg-black overflow-hidden'}>
         <ContentHeader />
-        <div className={'flex-1 px-4 box-border overflow-auto'}>
+        <div className={'flex-1 px-4 box-border overflow-hidden'}>
           <Outlet />
         </div>
       </div>
