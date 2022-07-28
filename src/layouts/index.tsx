@@ -17,8 +17,10 @@ const Layout: FC = () => {
     if (token) {
       //进行连接
       socketStore.connect();
+      socketStore.state.socket?.emit('message', 'xxxxxxx');
     } else {
       //断开连接
+      socketStore.disconnect();
     }
   }, [token]);
   useEffect(() => {

@@ -15,8 +15,8 @@ export const socketStore = defineModel('socket', {
   },
   actions: {
     connect(state) {
-      console.log('连接');
       if (state.socket === null) {
+        console.log('连接');
         const socket = io('ws://127.0.0.1:3000', {
           path: '/socket',
           transports: ['websocket'],
@@ -24,13 +24,35 @@ export const socketStore = defineModel('socket', {
             token: userStore.state.user?.token,
           },
         });
-        socket.on('enter', socketStore.enter);
+        socket.on('connect', socketStore.socketConnect);
+        socket.on('disconnect', socketStore.socketDisconnect);
+        socket.on('connect_error', socketStore.socketConnectError);
+        socket.on('enter', socketStore.socketEnter);
         state.socket = socket;
+      }
+    },
+    disconnect(state) {
+      if (state.socket !== null) {
+        state.socket.disconnect();
+        state.socket.close();
+        state.socket = null;
       }
     },
   },
   effects: {
-    enter(data: any) {
+    //连接
+    socketConnect() {
+      console.info('客户端连接成功：', this.state.socket?.id);
+    },
+    //断开连接
+    socketDisconnect() {
+      console.info('客户端已断开连接：');
+    },
+    //连接错误
+    socketConnectError() {
+      console.info('客户端连接错误：');
+    },
+    socketEnter(data: any) {
       console.log('已经进入了：', data);
     },
   },
